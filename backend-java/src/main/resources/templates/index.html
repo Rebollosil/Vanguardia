@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNICABA - Transformación Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-unicaba: #003366;
+            --dorado-academic: #b8860b;
+        }
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Navbar Institucional */
+        .navbar-unicaba { background-color: var(--azul-unicaba); border-bottom: 4px solid var(--dorado-academic); }
+        .navbar-brand { font-size: 1.5rem; font-weight: bold; }
+        
+        /* Cinta de Alumnos en Movimiento */
+        .marquee-container {
+            background: #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+            overflow: hidden;
+            padding: 8px 0;
+            white-space: nowrap;
+        }
+        .marquee-text {
+            display: inline-block;
+            animation: scroll-left 20s linear infinite;
+            font-weight: 500;
+            color: var(--azul-unicaba);
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Área de Código Ampliada */
+        .code-container-large {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            min-height: 400px; /* Más grande como pediste */
+            border: 2px solid var(--azul-unicaba);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .code-text {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #9cdcfe;
+            font-size: 1.2rem; /* Tamaño de letra más grande */
+            white-space: pre-wrap;
+        }
+
+        .card-unicaba { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-unicaba { background-color: var(--azul-unicaba); color: white; border: none; font-weight: bold; }
+        .btn-unicaba:hover { background-color: #002244; color: white; }
+
+        /* Estilo para el botón de Hallazgos */
+        .findings-trigger {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .findings-trigger:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-unicaba navbar-dark p-3">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img th:src="@{/imagenes/logo-unicaba.png}" 
+                     alt="Logo UNICABA" 
+                     class="me-3 rounded bg-white p-1" 
+                     style="height: 65px; width: auto; object-fit: contain; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+                <div>
+                    <span class="navbar-brand m-0">UNICABA - Transformación Digital</span>
+                    <div class="text-white-50 small">Cátedra: Transformación Digital en las Organizations</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="marquee-container">
+        <div class="marquee-text">
+            <strong>ALUMNOS:</strong> Rebollo Silvina &nbsp;&nbsp;|&nbsp;&nbsp; Rebollo Natalia &nbsp;&nbsp;|&nbsp;&nbsp; Martin Canepa &nbsp;&nbsp;|&nbsp;&nbsp; Ricardo Ulloa &nbsp;&nbsp;|&nbsp;&nbsp; [Alumno 5] &nbsp;&nbsp;|&nbsp;&nbsp; [Alumno 6] &nbsp;&nbsp;—&nbsp;&nbsp; <strong>PROYECTO:</strong> Auditoría de Seguridad con IA
+        </div>
+    </div>
+
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-unicaba p-4 mb-4">
+                    <h5 class="text-secondary"><i class="fa-solid fa-terminal me-2"></i>Entrada de Código</h5>
+                    <form th:action="@{/}" th:object="${requestDTO}" method="post" id="auditForm">
+                        <div class="mb-3">
+                            <label class="form-label small">Lenguaje</label>
+                            <select class="form-select" th:field="*{lenguaje}">
+                                <option value="Java">Java</option>
+                                <option value="Python">Python</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control bg-light" th:field="*{codigoFuente}" rows="10" placeholder="Pegue el código aquí..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-unicaba w-100 p-3" id="btnAnalizar">
+                            <i class="fa-solid fa-robot me-2"></i>ANALIZAR AHORA
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                
+                <div th:if="${resultado == null}" class="p-5 text-center text-muted card card-unicaba">
+                    <i class="fa-solid fa-magnifying-glass-chart fa-4x mb-3" style="opacity: 0.2;"></i>
+                    <h4>Sistema Listo</h4>
+                    <p>Cargue el código fuente para iniciar la auditoría pedagógica.</p>
+                </div>
+
+                <div th:if="${resultado != null}">
+                    
+                    <div class="card card-unicaba p-4 mb-4">
+                        <h4 class="text-primary d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-shield-check me-2"></i>Propuesta de Código Seguro</span>
+                            <span class="badge bg-success fs-6">Refactorizado</span>
+                        </h4>
+                        <div class="code-container-large mt-3">
+                            <pre class="code-text" th:text="${resultado.codigoRefactorizado}"></pre>
+                        </div>
+                    </div>
+
+                    <div class="card card-unicaba findings-trigger bg-danger text-white p-4" data-bs-toggle="modal" data-bs-target="#modalHallazgos">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="m-0"><i class="fa-solid fa-triangle-exclamation me-2"></i>Hallazgos Críticos y Seguridad</h4>
+                            <span>Tocar para ver especificaciones <i class="fa-solid fa-circle-chevron-right ms-2"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="card card-unicaba p-4 mt-4">
+                        <h5 class="text-secondary border-bottom pb-2 mb-3">Justificación Técnica</h5>
+                        <p style="white-space: pre-line;" th:text="${resultado.explicacionPedagogica}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalHallazgos" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="fa-solid fa-list-check me-2"></i>Especificaciones de Seguridad y Buenas Prácticas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div th:if="${resultado != null}">
+                        <div th:each="h : ${resultado.hallazgos}" class="card mb-3 border-start border-4 shadow-sm" 
+                             th:classappend="${h.severidad == 'Crítica' || h.severidad == 'Critico' ? 'border-danger' : 'border-warning'}">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title text-uppercase fw-bold" th:text="${h.categoria}">Categoría</h5>
+                                    <span class="badge" th:classappend="${h.severidad == 'Crítica' || h.severidad == 'Critico' ? 'bg-danger' : 'bg-warning text-dark'}" th:text="${h.severidad}">Severidad</span>
+                                </div>
+                                <p class="card-text mt-2" th:text="${h.descripcion}"></p>
+                                <div class="text-muted small">
+                                    <i class="fa-solid fa-location-crosshairs"></i> Línea: <strong th:text="${h.lineaCodigo}"></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar Análisis</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animación de carga en el botón
+        document.getElementById('auditForm').addEventListener('submit', function() {
+            var btn = document.getElementById('btnAnalizar');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>PROCESANDO CON IA...';
+        });
+    </script>
+</body>
+</html>
