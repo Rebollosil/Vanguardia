@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    // Con solo nombrar el método así, Spring Data crea automáticamente 
-    // la consulta SQL por detrás para verificar si un email ya existe.
-    boolean existsByEmail(String email);
+    
+    // Cambiamos "Email" por "Username" para que coincida con nuestra clase Usuario
+    Usuario findByUsername(String username);
+    
+    boolean existsByUsername(String username);
 }
