@@ -43,3 +43,18 @@ Para que este proyecto funcione en tu computadora local, no necesitas configurar
    ```bash
    ./mvnw spring-boot:run
    ```
+
+### Paso 4: Crear Usuarios
+1. Insertar el registro con username
+2. Encriptar la contraseña usando el archivi
+   ```
+   backend-java/src/main/java/com/auditoria/backend/TestPassword.java
+   ```
+3. Correr el siguiente comando
+   ```
+   ./mvnw compile exec:java -Dexec.mainClass="com.auditoria.backend.TestPassword"
+   ```
+4. Ejemplo de lo que imprime
+   ```
+   [Password generada: $2a$10$C0Ce/LmIhs3kdGVw.Nl83.cJ8yaajYaYma0NLmUQkfxa6x8gWIlx6]
+   ```
