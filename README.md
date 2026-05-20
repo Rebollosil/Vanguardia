@@ -31,6 +31,15 @@ Para que este proyecto funcione en tu computadora local, no necesitas configurar
 ### Paso 3: Ejecutar el Proyecto
 1. **Reinicia tu editor de código** (cierra por completo Visual Studio Code y vuelve a abrirlo) para que tu computadora detecte la nueva variable de entorno de Java.
 2. Abre una terminal dentro de VS Code (`Terminal -> New Terminal`).
-3. Navega hacia la carpeta del backend Java:
+3. Revisar las credenciales de la base de datos en:
+   ```bash
+   backend-java/src/main/resources/application.properties
+   ```
+4. Navega hacia la carpeta del backend Java:
    ```bash
    cd backend-java
+   ```
+5. Ejecutar el proyecto
+   ```bash
+   ./mvnw spring-boot:run
+   ```
