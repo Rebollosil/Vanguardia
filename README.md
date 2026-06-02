@@ -58,3 +58,6 @@ Para que este proyecto funcione en tu computadora local, no necesitas configurar
    ```
    [Password generada: $2a$10$C0Ce/LmIhs3kdGVw.Nl83.cJ8yaajYaYma0NLmUQkfxa6x8gWIlx6]
    ```
+5. Próximos pasos / En desarrollo:
+
+Módulo de Registro: Interfaz de alta de usuarios (Alumnos/Profesores) maquetada y lista para integración con el servicio de persistencia.
