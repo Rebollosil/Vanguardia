@@ -61,3 +61,11 @@ Para que este proyecto funcione en tu computadora local, no necesitas configurar
 5. Próximos pasos / En desarrollo:
 
 Módulo de Registro: Interfaz de alta de usuarios (Alumnos/Profesores) maquetada y lista para integración con el servicio de persistencia.
+
+# 🚀 Proyecto Vanguardia - Auditoría Inteligente
+
+## 🎥 Video de Demostración
+Hacé clic en el siguiente enlace para ver el funcionamiento del sistema (Login, conexión con XAMPP y análisis con IA):
+
+👉 **https://drive.google.com/file/d/1gFX0MS44SdG0YJEc_bZLVmqOtfXVA0nk/view?usp=sharing
+
