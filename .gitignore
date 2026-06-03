@@ -1,0 +1,18 @@
+# Python (Entornos virtuales y caché)
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Java (Maven, compilados y binarios)
+target/
+*.class
+.mtj.tmp/
+*.jar
+*.war
+
+# IDEs y Sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
